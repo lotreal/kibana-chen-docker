@@ -13,6 +13,14 @@ endef
 build:
 	docker build --tag $(IMAGE) .
 
+.PHONY: pull
+pull:
+	docker pull $(IMAGE)
+
+.PHONY: push
+push:
+	docker push $(IMAGE)
+
 .PHONY: test
 test:
 	docker run --rm -it --publish ${PORT}:3000 $(docker_run_flags) $(IMAGE) morbo script/kbnauth
