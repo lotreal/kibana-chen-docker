@@ -4,6 +4,10 @@ NAME = kibana-chen
 IMAGE = lotreal/kibana-chen
 PORT = 5601
 
+define docker_run_flags
+--link es:es
+endef
+
 
 .PHONY: build
 build:
@@ -11,11 +15,11 @@ build:
 
 .PHONY: test
 test:
-	docker run --rm -it --publish ${PORT}:3000 $(IMAGE) morbo script/kbnauth
+	docker run --rm -it --publish ${PORT}:3000 $(docker_run_flags) $(IMAGE) morbo script/kbnauth
 
 .PHONY: run
 run:
-	docker run --detach --name $(NAME) --publish $(PORT):80 $(IMAGE)
+	docker run --detach --name $(NAME) --publish $(PORT):80 $(docker_run_flags) $(IMAGE)
 
 .PHONY: shell
 shell:
