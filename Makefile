@@ -25,6 +25,10 @@ push:
 test:
 	docker run --rm -it --publish ${PORT}:3000 $(docker_run_flags) $(IMAGE) morbo script/kbnauth
 
+.PHONY: clean
+clean:
+	docker rm -f $(NAME)
+
 .PHONY: run
 run:
 	docker run --detach --name $(NAME) --publish $(PORT):80 $(docker_run_flags) $(IMAGE)
