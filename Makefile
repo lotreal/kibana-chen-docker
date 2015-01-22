@@ -27,7 +27,7 @@ test:
 
 .PHONY: clean
 clean:
-	docker rm -f $(NAME)
+	-docker rm -f $(NAME)
 
 .PHONY: run
 run:
